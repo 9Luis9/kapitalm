@@ -50,9 +50,9 @@
     $result = mysql_query("SELECT user_id FROM users WHERE login='$login'",$db);
     $myrow = mysql_fetch_array($result);
     if (!empty($myrow['user_id'])) 
-    {
-    echo "<script>alert('Введенный вами логин уже зарегистрирован! Введите другой логин!');location.href='Registr.php';</script>";
-    }
+		{
+		echo "<script>alert('Введенный вами логин уже зарегистрирован! Введите другой логин!');location.href='Registr.php';</script>";
+		}
  // если такого нет, то сохраняем данные
     $result2 = mysql_query ("INSERT INTO users (login,password,email,registration_code) VALUES('$login','$password','$email','$registration_code')");
     // Проверяем, есть ли ошибки
