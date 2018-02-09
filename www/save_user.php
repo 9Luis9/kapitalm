@@ -5,19 +5,21 @@
     if (isset($_POST['email'])) { $email=$_POST['email']; if ($email =='') { unset($email);} }
     //заносим введенный пользователем email в переменную $email, если он пустой, то уничтожаем переменную
     if (empty($login) or empty($password)or empty($email)) //если пользователь не ввел логин,пароль или email то выдаем ошибку и останавливаем скрипт
-    {
-    echo "<script>alert('Вы ввели не всю информацию! Заполните все поля!');location.href='Registr.php';</script>";
-    }
+        {
+            echo "<script>alert('Вы ввели не всю информацию! Заполните все поля!');location.href='Registr.php';</script>";
+        }
     if (!preg_match("/[0-9a-z_]+@[0-9a-z_^\.]+\.[a-z]{2,3}/i", $email)) //проверка    е-mail адреса регулярными выражениями на корректность
-    {
-    echo "<script>alert('Email введен неверно!');location.href='Registr.php';</script>";
-    }
-    if (strlen($login) < 5 or strlen($login) > 15) {
-    echo "<script>alert('Логин должен состоять не менее чем из 5 символов и не более чем из 15!');location.href='Registr.php';</script>";
-    }
-    if (strlen($password) < 5 or strlen($password) > 15) {
-    echo "<script>alert('Пароль должен состоять не менее чем из 5 символов и не более чем из 15!');location.href='Registr.php';</script>";
-    }  
+        {
+            echo "<script>alert('Email введен неверно!');location.href='Registr.php';</script>";
+        }
+    if (strlen($login) < 5 or strlen($login) > 15) 
+        {
+            echo "<script>alert('Логин должен состоять не менее чем из 5 символов и не более чем из 15!');location.href='Registr.php';</script>";
+        }
+    if (strlen($password) < 5 or strlen($password) > 15) 
+        {
+            echo "<script>alert('Пароль должен состоять не менее чем из 5 символов и не более чем из 15!');location.href='Registr.php';</script>";
+        }  
     // Символы, которые будут использоваться в пароле. 
     $chars="qazxswedcvfrtgbnhyujmkiolp1234567890QAZXSWEDCVFRTGBNHYUJMKIOLP"; 
     // Количество символов в пароле. 
@@ -28,7 +30,7 @@
     $registration_code=null; 
     // Создаём пароль. 
     while($max--) 
-    $registration_code.=$chars[rand(0,$size)]; 
+        $registration_code.=$chars[rand(0,$size)]; 
     // Выводим созданный пароль.
     //если логин и пароль введены, то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
     $login = stripslashes($login);
@@ -56,11 +58,11 @@
     // Проверяем, есть ли ошибки
     if ($result2=='TRUE')
     {
-$subject= " Письмо с сайта kapitalm.com ";
-$message= $login.",спасибо за регистрацию на сайте ООО Капитал-М. Чтобы продолжить пройдите по ссылке http://kapitalm.com.xn--80aauktf0a4f.xn--80aswg/confirm.php?registration_code=.$registration_code.";
-mail($email,$subject,$message);
-echo $login.",регистрация прошла успешна,чтобы продолжить подтвердите ваш mail.";
-} 
+        $subject= " Письмо с сайта kapitalm.com ";
+        $message= $login.",спасибо за регистрацию на сайте ООО Капитал-М. Чтобы продолжить пройдите по ссылке http://kapitalm.com.xn--80aauktf0a4f.xn--80aswg/confirm.php?registration_code=.$registration_code.";
+        mail($email,$subject,$message);
+        echo $login.",регистрация прошла успешна,чтобы продолжить подтвердите ваш mail.";
+    } 
 else 
     echo "Ошибка при отправке"
     ?>
