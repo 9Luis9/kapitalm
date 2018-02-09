@@ -1,0 +1,123 @@
+html {
+    background-image: url(images/aaa.png);
+    background-repeat: no-repeat; 
+     background-size: cover;
+  background-position: center;
+  display: inline-block;
+}
+
+@keyframes fadeIm-1
+{
+    from    { opacity: 1; }
+    16%     { opacity: 1; }
+    25%     { opacity: 0; }
+    91%     { opacity: 0; }
+    to      { opacity: 1; }
+}
+ 
+@keyframes fadeIm-2
+{
+    from    { opacity: 0; }
+    16%     { opacity: 0; }
+    25%     { opacity: 1; }
+    41%     { opacity: 1; }
+    50%     { opacity: 0; }
+    to      { opacity: 0; }
+}
+ 
+@keyframes fadeIm-3
+{
+    from    { opacity: 0; }
+    41%     { opacity: 0; }
+    50%     { opacity: 1; }
+    66%     { opacity: 1; }
+    75%     { opacity: 0; }
+    to      { opacity: 0; }
+}
+ 
+@keyframes fadeIm-4
+{
+    from    { opacity: 0; }
+    66%     { opacity: 0; }
+    75%     { opacity: 1; }
+    91%     { opacity: 1; }
+    to      { opacity: 0; }
+}
+ 
+.div-style
+{
+    position: relative; 
+    text-align: center; 
+    width: 99%;
+     left: 0%;
+     
+}
+ 
+.img-style
+{
+    width: 99%;
+    margin-top: 8px;
+    border: 0px solid none;
+     
+    animation-duration: 24s;
+    animation-iteration-count: infinite;
+}
+ 
+.img-style.next
+{
+    position: absolute;
+    left: 33.3%;
+    left: 0.5%;
+    
+    opacity: 0;
+}
+ 
+.img-style.im-1
+{ 
+    animation-name: fadeIm-1;
+}
+ 
+.img-style.next.im-2
+{ 
+    animation-name: fadeIm-2;
+}
+ 
+.img-style.next.im-3
+{
+    animation-name: fadeIm-3;
+}
+ 
+.img-style.next.im-4
+{
+    animation-name: fadeIm-4;
+}
+
+
+
+* {margin:0;padding:0;}
+body {font-family:'Arial';}
+
+#page {width:940px;margin:0 auto;}
+
+
+header {height:615px;}
+header .logo {float:right;}
+header .logo img {margin:23px 250px 10px 0px;}
+
+nav {clear:both;height:60px;background-color:lightseagreen;border-radius:50px 50px 0px 0px;}
+nav ul {list-style:none;}
+nav ul li {float:left;margin:17px 50px;font-size:20px;font-family:'Georgia';font-style:italic;}
+nav ul li a {color:white;text-decoration:none;}
+nav ul li a:hover {text-decoration:underline;}
+
+.div-style {height:435px;width:940px;background-color:lightseagreen;border-radius:0px 0px 8px 8px;margin-bottom:15px;}
+
+#content {clear:both;}
+#content h1 {font-size:28px;font-family:'Georgia';font-style:italic;font-weight:normal;margin-bottom:20px;}
+#content img.float-right {float:right;margin:0px 0px 15px 15px;}
+#content p {margin-bottom:15px;}
+
+footer {clear:both;border-top:4px lightseagreen solid;margin-top:30px;padding:15px 0px;font-size:12px;}
+footer a {color:#000;text-decoration:underline;}
+footer a:hover {text-decoration:none;}
+
