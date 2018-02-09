@@ -5,9 +5,9 @@ if (isset($_POST['login'])) { $login = $_POST['login']; if ($login == '') { unse
 if (isset($_POST['password'])) { $password=$_POST['password']; if ($password =='') { unset($password);} }
     //заносим введенный пользователем пароль в переменную $password, если он пустой, то уничтожаю переменную
 if (empty($login) or empty($password)) //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем скрипт
-    {
-    echo "<script>alert('Вы ввели не всю информацию!Заполните все поля!');location.href='Auto.php';</script>";
-    }
+		{
+		echo "<script>alert('Вы ввели не всю информацию!Заполните все поля!');location.href='Auto.php';</script>";
+		}
     //если логин и пароль введены,то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
     $login = stripslashes($login);
     $login = htmlspecialchars($login);
@@ -24,17 +24,19 @@ $password = strrev($password);// для надежности добавил ре
 $result = mysql_query("SELECT * FROM users WHERE login='$login' AND password='$password'",$db); //извлекаем из базы все данные о пользователе с введенным логином
     $myrow = mysql_fetch_array($result);
     if (empty($myrow['user_id']))
-    {
-    //если пользователя с введенным логином не существует
-    echo "<script>alert('Извините,введенный вами логин или пароль неверный!');location.href='Registr.php';</script>";
-    }
-    else {
+		{
+		//если пользователя с введенным логином не существует
+		echo "<script>alert('Извините,введенный вами логин или пароль неверный!');location.href='Registr.php';</script>";
+		}
+    else 
+		{
     //если существует, то сверяем пароли
     //если пароли совпадают, то запускаем пользователю сессию! Пользователь вошел!
       $_SESSION['password']=$myrow['password'];
         $_SESSION['login']=$myrow['login']; 
         $_SESSION['user_id']=$myrow['user_id'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
-   echo "<html><head><meta http-equiv='Refresh' content='0; URL=lk.php'></head></html>"; }
+		echo "<html><head><meta http-equiv='Refresh' content='0; URL=lk.php'></head></html>"; 
+		}
 //перенаправляем пользователя на главную страничку, там ему и сообщим об удачном входе
     
     ?>
