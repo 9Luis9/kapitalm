@@ -30,18 +30,11 @@
     while($max--) 
     $registration_code.=$chars[rand(0,$size)]; 
     // Выводим созданный пароль.
-    //если логин и пароль введены, то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
-    $login = stripslashes($login);
-    $login = htmlspecialchars($login);
-    $password = stripslashes($password);
-    $password = htmlspecialchars($password);
-    $email = stripslashes($email);
-    $email = htmlspecialchars($email);
- //удаляем лишние пробелы
-    $login = trim($login);
-    $password = trim($password);
-    $password = md5($password);//шифруем пароль          
-    $password = strrev($password);// для надежности добавил реверс  
+    // если логин и пароль введены, то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
+    // удаляем лишние пробелы
+    $email = htmlspecialchars(stripslashes($email));
+    $login = trim(htmlspecialchars(stripslashes($login)));
+    $password = strrev(md5(htmlspecialchars(stripslashes($password)))); //шифруем пароль, для надежности добавил реверс
  // подключаемся к базе
     include ("bd.php");
  // проверка на существование пользователя с таким же логином
