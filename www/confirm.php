@@ -2,15 +2,15 @@
 header('Content-Type: text/html; charset=utf-8');
 include ("bd.php");
 mysql_query("SET NAMES 'utf8'",$db);
-$registration_code = $_GET['registration_code'];
+$registration_code = $_GET['activation_code'];
 $login = $_GET['login'];
-    $result = mysql_query("SELECT `user_id`,`login`,`registration_code` FROM `users` WHERE `login`='$login'",$db); // извлекаем идентификатор пользователя с данным логином
+    $result = mysql_query("SELECT `user_id`,`login`,`activation_code` FROM `users` WHERE `login`='$login'",$db); // извлекаем идентификатор пользователя с данным логином
 	$myrow = mysql_fetch_array($result); 
-	$registration_code1 = $myrow['registration_code']; // создаем такой же код подтверждения
+	$activation_code1 = $myrow['activation_code']; // создаем такой же код подтверждения
 
-	if ($registration_code == $registration_code1) // сравниваем полученный из url и сгенерированный код 
+	if ($activation_code == $activation_code1) // сравниваем полученный из url и сгенерированный код 
 		{
-			mysql_query("UPDATE  `users` SET `activation`='1' WHERE `login`='$login'",$db); // если равны, то активируем пользователя
+			mysql_query("UPDATE  `users` SET `activated`='1' WHERE `login`='$login'",$db); // если равны, то активируем пользователя
 			echo "Ваш Email подтвержден! Теперь вы можете зайти на сайт под своим логином! <a href='http://kapitalm.com.xn--80aauktf0a4f.xn--80aswg/Auto.php'>Авторизация</a>";
 		}
 	else

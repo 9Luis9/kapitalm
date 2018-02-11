@@ -6,7 +6,7 @@ if (isset($_POST['password'])) { $password=$_POST['password']; if ($password =='
     //заносим введенный пользователем пароль в переменную $password, если он пустой, то уничтожаю переменную
 if (empty($login) or empty($password)) //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем скрипт
         {
-        echo "<script>alert('Вы ввели не всю информацию!Заполните все поля!');location.href='Auto.php';</script>";
+        echo "<script>alert('Вы ввели не всю информацию!Заполните все поля!');location.href='/auto.php';</script>";
         }
     //если логин и пароль введены,то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
     $login = stripslashes($login);
@@ -22,13 +22,13 @@ $password = md5($password);//шифруем пароль
 $password = strrev($password);// для надежности добавил реверс 
 $result = mysql_query("SELECT * FROM `users` WHERE `login`='$login' AND `password`='$password'",$db); //извлекаем из базы все данные о пользователе с введенным логином
     $myrow = mysql_fetch_array($result);
-    if ($myrow['activation']=='0') {
-        echo "<script>alert('Извините,аккаунт не активирован!');location.href='Auto.php';</script>";
+    if ($myrow['activated']=='0') {
+        echo "<script>alert('Извините,аккаунт не активирован!');location.href='/auto.php';</script>";
         }
     if (empty($myrow['user_id']))
         {
     //если пользователя с введенным логином не существует
-        echo "<script>alert('Извините,введенный вами логин или пароль неверный!');location.href='Registr.php';</script>";
+        echo "<script>alert('Извините,введенный вами логин или пароль неверный!');location.href='/registr.php';</script>";
         } 
     else 
         {

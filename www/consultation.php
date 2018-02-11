@@ -17,11 +17,11 @@
 		<p>Пройдите процесс регистрации или авторизируйтесь, чтобы задать вопрос консультанту.</p>
 	</section>
 	<center>
- <form action="/Registr.php">
+ <form action="/registr.php">
     <button type="submit">Регистрация</button>
 </form>
  -
-<form action="/Auto.php">
+<form action="/auto.php">
     <button type="submit">Авторизация</button>
 </form>
 </center>
