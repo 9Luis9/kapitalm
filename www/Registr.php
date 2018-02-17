@@ -69,11 +69,11 @@ function validate_form ( )
 <h1>Зарегистрируйтесь</h1>
 <form name="Registr" action="save_user.php" method="post" onsubmit="return validate_form( );" >
 <p><label>Введите логин:<br>
-<input name="login" size="30" type="text"></label></p>
+<input name="login" size="30" type="text" placeholder="Логин"></label></p>
 <p><label>Введите email:<br>
-<input name="email" size="30" type="email"></label></p>
+<input name="email" size="30" type="email" placeholder="mail@mail.ru"></label></p>
 <p><label>Введите пароль:<br>
-<input name="password" size="30" type="password"></label></p>
+<input name="password" size="30" type="password" placeholder="Пароль"></label></p>
 <p><input name="Registr" type="submit" value="Регистрация"></p>
 <p><a href='/auto.php'>Уже зарегистрированы?</a></p>
 <br>

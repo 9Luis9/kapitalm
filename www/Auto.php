@@ -13,11 +13,11 @@ session_start();
 <Center>
 <a href="/" title="" class="logo"><img src="images/km1.png" alt="Капитал-М" /></a>
 <h1>Вход:</h1>
-<form action="/testreg.php" method="post" name="login">
+<form action="testreg.php" method="post" name="login">
 <p><label>Введите логин:<br>
-<input name="login" size="25" type="text"></label></p>
+<input name="login" size="25" type="text" placeholder="Логин"></label></p>
 <p><label>Введите пароль:<br>
-<input name="password" size="25" type="password"></label></p>
+<input name="password" size="25" type="password" placeholder="Пароль"></label></p>
 <p><input type="submit" name="submit" value="Войти"></p>
 <p>Еще не зарегистрированы? </br><a href= "/registr.php">Зарегистрируйтесь!</a></p>
 <br>

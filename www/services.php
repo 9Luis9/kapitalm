@@ -24,7 +24,9 @@
 		<p>3. Деятельность в области права.</p>
 	</section>
 	
-	<?php include('templates/footer.php'); ?>
+	<?php 
+    include('templates/footer.php'); 
+    ?>
 	</div>
 </body>
 </html>

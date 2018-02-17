@@ -37,6 +37,8 @@ $result = mysql_query("SELECT * FROM `users` WHERE `login`='$login' AND `passwor
         $_SESSION['password']=$myrow['password'];
         $_SESSION['login']=$myrow['login']; 
         $_SESSION['user_id']=$myrow['user_id'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
-        }
+        $_SESSION['login']= $login;
+        echo "<html><head><meta http-equiv='Refresh' content='0; URL=lk.php'></head></html>"; }
+        
 
     ?>
