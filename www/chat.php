@@ -5,9 +5,10 @@ include ("bd.php");
 $user_id = $_SESSION['user_id'];
 if (isset($_POST['text'])) { $message_text = $_POST['text']; if ($message_text == '') { unset($message_text);} }
 
-
-    mysql_query ("INSERT INTO `messages` (`user_id`,`message_id`,`message_text`,`message_time`) VALUES('$user_id','$message_id','$message_text','NOW()')");
-
+if ($_POST['enter'] and $_POST['text']) 
+    {
+        mysql_query ("INSERT INTO `messages` (`user_id`,`message_id`,`message_text`,`message_time`) VALUES('$user_id','$message_id','$message_text','NOW()')");
+            }
 ?>
 <html>
 <head>
@@ -39,8 +40,8 @@ if(isset($_SESSION['login']))
 <body>
 <div class="ChatBox">
 <?php 
-    $Query = mysql_query('SELECT * FROM `messages`,`users` ORDER By `message_time` DESC LIMIT 50');
-        while ($myrow = mysql_fetch_assoc($Query)) echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';
+    $Query = mysql_query('SELECT * FROM `messages` ORDER By `message_time` DESC LIMIT 30');
+        while ($myrow = mysql_fetch_assoc($Query)) echo '<div class="ChatBlock"><span>'.$myrow['user_id'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';
 ?>
 </div>
 </body>
