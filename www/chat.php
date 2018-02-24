@@ -7,7 +7,7 @@ if (isset($_POST['text'])) { $message_text = $_POST['text']; if ($message_text =
 
 if ($_POST['enter'] and $_POST['text']) 
     {
-        mysql_query ("INSERT INTO `messages` (`user_id`,`message_id`,`message_text`,`message_time`) VALUES('$user_id','$message_id','$message_text','NOW()')");
+        mysql_query ("INSERT INTO `messages` (`user_id`,`message_id`,`message_text`,`message_time`) VALUES('$user_id','$message_id','$message_text',NOW())");
             }
 ?>
 <html>
@@ -28,23 +28,23 @@ if(isset($_SESSION['login']))
 ?>
 </center>  
 
-
+<body>
+<div class="ChatBox">
+<?php 
+    $Query = mysql_query("SELECT * FROM `messages` WHERE `user_id` = '$user_id' ORDER By `message_time` DESC LIMIT 30");
+        while ($myrow = mysql_fetch_assoc($Query)) echo '<div class="ChatBlock"><span>'.$myrow['user_id'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';
+?>
+</div>
+</body>
     
 <center>
+<br> 
 <form method="POST" action="/chat.php">
 <textarea class="ChatMessage" name="text" cols="60" rows="12" placeholder="Текст сообщения" required></textarea>
 <br><input type="submit" name="enter" value="Отправить"> <input type="reset" value="Очистить">
 <p><a href='/lk.php'>Назад</a></p>
 </form>
 </center>
-<body>
-<div class="ChatBox">
-<?php 
-    $Query = mysql_query('SELECT * FROM `messages` ORDER By `message_time` DESC LIMIT 30');
-        while ($myrow = mysql_fetch_assoc($Query)) echo '<div class="ChatBlock"><span>'.$myrow['user_id'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';
-?>
-</div>
-</body>
 </html>
 
 
