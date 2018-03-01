@@ -1,14 +1,24 @@
 <?php
+ob_start();
+error_reporting(0);
 header('Content-Type: text/html; charset=utf-8');
 session_start();
-include ("bd.php");
+include ("bd.php"); //подключение к бд
 $user_id = $_SESSION['user_id'];
-if (isset($_POST['text'])) { $message_text = $_POST['text']; if ($message_text == '') { unset($message_text);} }
-
-if ($_POST['enter'] and $_POST['text']) 
-    {
-        mysql_query ("INSERT INTO `messages` (`user_id`,`message_id`,`message_text`,`message_time`) VALUES('$user_id','$message_id','$message_text',NOW())");
+if (isset($_POST['text'])) { $message_text = $_POST['text']; if ($message_text == '') { unset($message_text);} } 
+//заносим введенный пользователем текст сообщения в переменную $message_text, если текстовое поле пустое, то уничтожаем переменную
+ $result = mysql_query("SELECT `chat_id` FROM `chats` WHERE `user_id`='$user_id'",$db)or die(mysql_error()); //проверка на существование чата
+    $myrow = mysql_fetch_array($result);
+    if (empty($myrow['chat_id'])) 
+        {
+            mysql_query("INSERT INTO `chats` (`user_id`) VALUES('$user_id')")or die(mysql_error()); // если чат не существует,то добавляем данные
             }
+if ($_POST['enter'] && $_POST['text'] && !empty($myrow['chat_id'])) //если нажата кнопка "отправить", текстовое поле не пустое,то добавляем данные в базу
+    {
+        $result2 = mysql_query ("INSERT INTO `messages` (`user_id`,`chat_id`,`message_id`,`message_text`,`message_time`) VALUES('$user_id','$myrow[chat_id]','$message_id','$message_text',NOW())") or die(mysql_error()); // добавление данных о чате в базу
+            header("Location:/chat.php?");
+                }
+
 ?>
 <html>
 <head>
@@ -31,12 +41,11 @@ if(isset($_SESSION['login']))
 <body>
 <div class="ChatBox">
 <?php 
-    $Query = mysql_query("SELECT * FROM `messages` WHERE `user_id` = '$user_id' ORDER By `message_time` DESC LIMIT 30");
-        while ($myrow = mysql_fetch_assoc($Query)) echo '<div class="ChatBlock"><span>'.$myrow['user_id'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';
+    $Query = mysql_query("SELECT `user_id`,`message_time`,`message_text`,`login` FROM `messages` LEFT JOIN `users` USING (`user_id`) WHERE `chat_id` = '$myrow[chat_id]' ORDER By `message_time` DESC LIMIT 30");
+        while ($myrow = mysql_fetch_array($Query)) echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';
 ?>
 </div>
-</body>
-    
+</body>  
 <center>
 <br> 
 <form method="POST" action="/chat.php">
