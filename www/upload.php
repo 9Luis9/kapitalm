@@ -25,7 +25,7 @@ if (isset($_FILES['image'])){
     $file_name = $_FILES['image']['name'];
     $file_size = $_FILES['image']['size'];
     $file_tmp = $_FILES['image']['tmp_name'];
-    $file_name1 = $_FILES['image']['type'];
+    $file_type = $_FILES['image']['type'];
     $file_ext = strtolower(end(explode('.',$_FILES['image']['name'])));
     $expensions = array("jpeg","jpg","png");
     
