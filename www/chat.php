@@ -41,8 +41,15 @@ if(isset($_SESSION['login']))
 <body>
 <div class="ChatBox" style="word-wrap:break-word;">
 <?php 
-    $Query = mysql_query("SELECT `user_id`,`message_time`,`message_text`,`login` FROM `messages` LEFT JOIN `users` USING (`user_id`) WHERE `chat_id` = '$myrow[chat_id]' ORDER By `message_time` DESC LIMIT 30");
-        while ($myrow = mysql_fetch_array($Query)) echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';
+    $Query = mysql_query("SELECT `user_id`,`message_time`,`message_text`,`login`,`role_id` FROM `messages` LEFT JOIN `users` USING (`user_id`) WHERE `chat_id` = '$myrow[chat_id]' ORDER By `message_time` DESC LIMIT 30");
+       while($myrow = mysql_fetch_array($Query));
+            if ($myrow['role_id']=='client'){
+              echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';   
+            }
+            if ($myrow['role_id']=='consultant'){
+                echo '<div class="Consultant"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';  
+            }
+               
 ?>
 </div>
 </body>  
