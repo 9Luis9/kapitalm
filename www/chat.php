@@ -39,7 +39,7 @@ if(isset($_SESSION['login']))
 </center>  
 
 <body>
-<div class="ChatBox">
+<div class="ChatBox" style="word-wrap:break-word;">
 <?php 
     $Query = mysql_query("SELECT `user_id`,`message_time`,`message_text`,`login` FROM `messages` LEFT JOIN `users` USING (`user_id`) WHERE `chat_id` = '$myrow[chat_id]' ORDER By `message_time` DESC LIMIT 30");
         while ($myrow = mysql_fetch_array($Query)) echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';
@@ -49,10 +49,14 @@ if(isset($_SESSION['login']))
 <center>
 <br> 
 <form method="POST" action="/chat.php">
-<textarea class="ChatMessage" name="text" cols="60" rows="12" placeholder="Текст сообщения" required></textarea>
+<textarea class="ChatMessage" name="text" cols="50" rows="4" placeholder="Текст сообщения" required></textarea>
 <br><input type="submit" name="enter" value="Отправить"> <input type="reset" value="Очистить">
-<p><a href='/lk.php'>Назад</a></p>
 </form>
+<form method="POST" action="/upload.php" enctype="multipart/form-data">
+      <input type="file" name="image"><br><br> 
+      <input type="submit" value="Загрузить"><br><br>
+      </form>
+<p><a href='/lk.php'>Назад</a></p>
 </center>
 </html>
 
