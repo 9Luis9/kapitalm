@@ -65,16 +65,15 @@ if(isset($_SESSION['login']))
             {
             if ($myrow['role_id']=='client' && (!empty($myrow['uploaded_doc'])))
             {
-              echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'&nbsp<a href="doc/$myrow[uploaded_doc]">Вложение</a></div>';   
+              echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'&nbsp<a href="doc/'.$myrow['uploaded_doc'].'">Документ</a></div>';   
             }
             elseif ($myrow['role_id']=='client' && (empty($myrow['uploaded_doc'])))
             {
-                echo '<div class="Consultant"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';  
-            } 
-            if ($myrow['role_id']=='consultant'){
                 echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';  
             } 
-        echo $myrow['uploaded_doc'];
+            if ($myrow['role_id']=='consultant'){
+                echo '<div class="Consultant"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';  
+            } 
             }
 ?>
 </div>
