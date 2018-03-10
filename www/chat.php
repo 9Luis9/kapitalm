@@ -62,15 +62,20 @@ if(isset($_SESSION['login']))
 <?php 
     $Query = mysql_query("SELECT `user_id`,`message_time`,`message_text`,`login`,`role_id`,`uploaded_doc` FROM `messages` LEFT JOIN `users` USING (`user_id`) WHERE `chat_id` = '$myrow[chat_id]' ORDER By `message_time` DESC LIMIT 30");
     while ($myrow = mysql_fetch_array($Query))
-        {
-            if ($myrow['role_id']=='client'){
+            {
+            if ($myrow['role_id']=='client' && (!empty($myrow['uploaded_doc'])))
+            {
               echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'&nbsp<a href="doc/$myrow[uploaded_doc]">Вложение</a></div>';   
             }
-            if ($myrow['role_id']=='consultant'){
+            elseif ($myrow['role_id']=='client' && (empty($myrow['uploaded_doc'])))
+            {
                 echo '<div class="Consultant"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';  
             } 
+            if ($myrow['role_id']=='consultant'){
+                echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';  
+            } 
         echo $myrow['uploaded_doc'];
-        }
+            }
 ?>
 </div>
 </body>  
