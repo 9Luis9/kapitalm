@@ -34,8 +34,11 @@ include ("bd.php");
 <form action="/dataadmin.php">
     <button type="submit">Личные данные</button>
 </form>
-<form action="/spisok.php">
-    <button type="submit">Отчеты</button>
+<form action="/list_cl.php">
+    <button type="submit">Клиенты</button>
+</form>
+<form action="/list_cons.php">
+    <button type="submit">Консультанты</button>
 </form>
 <p><a href="/logout.php">Выйти</a></p>
 </center>
