@@ -14,6 +14,7 @@
         $("#done").bind("click", function() {
             $.ajax({
                 url: "check_login.php",
+                type: "POST",
                 data: ({login: $("#login").val()}),
                 datatype: "html",
                 beforeSend: function () {
