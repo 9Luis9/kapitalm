@@ -11,7 +11,7 @@
         $("#information").text (data);
     }
     $(document).ready (function() {
-        $("#done").bind("click", function() {
+        $("#login").blur (function() {
             $.ajax({
                 url: "check_login.php",
                 type: "POST",
@@ -22,7 +22,7 @@
                 },
                 success: function (data){
                     if(data == "Логин занят")
-                        alert("Логин занят");
+                        $("#information").text (data);
                     else 
                         $("#information").text (data);
                 }
@@ -50,22 +50,9 @@ function validate_form ( )
                 valid = false;
         }
         
-    
-        if ( document.Registr.login.value == "")
-        {
-                alert ( "Введите логин!" );
-                valid = false;
-        }
-        
         if ( document.Registr.email.value == "")
         {
                 alert ( "Введите email!" );
-                valid = false;
-        }
-        
-        if ( document.Registr.password.value == "")
-        {
-                alert ( "Введите пароль!" );
                 valid = false;
         }
     
