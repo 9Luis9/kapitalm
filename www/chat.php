@@ -44,6 +44,21 @@ if ($_POST['enter'] && $_POST['text'] && !empty($myrow['chat_id'])) //если �
 <title>Чат</title>
 <link rel="stylesheet" type="text/css" href="style1.css" media="screen" />
 <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    function funcSuccess (data){
+        $("#message").text (data);
+    }
+   window.setInterval(function(){
+  $.ajax({
+    url: "check_chat.php",//Как в check_chat передать последнее сообщение? Я не понимаю
+    type: "POST",
+      
+      
+      
+}, 3000);
+    
+    </script>
 </head>
 <center>
 <a href="/" title="Капитал-М" class="logo"><img src="images/km1.png" alt="Капитал-М" /></a>
@@ -58,21 +73,25 @@ if(isset($_SESSION['login']))
 </center>  
 
 <body>
-<div class="ChatBox" style="word-wrap:break-word;">
+<div class="ChatBox" id="message" style="word-wrap:break-word;">
 <?php 
-    $Query = mysql_query("SELECT `user_id`,`message_time`,`message_text`,`login`,`role_id`,`uploaded_doc` FROM `messages` LEFT JOIN `users` USING (`user_id`) WHERE `chat_id` = '$myrow[chat_id]' ORDER By `message_time` DESC LIMIT 30");
+    $Query = mysql_query("SELECT `user_id`,`message_time`,`message_id`,`message_text`,`login`,`role_id`,`uploaded_doc` FROM `messages` LEFT JOIN `users` USING (`user_id`) WHERE `chat_id` = '$myrow[chat_id]' ORDER By `message_time` DESC LIMIT 30");
     while ($myrow = mysql_fetch_array($Query))
             {
             if ($myrow['role_id']=='client' && (!empty($myrow['uploaded_doc'])))
             {
-              echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'&nbsp<a href="doc/'.$myrow['uploaded_doc'].'">Документ</a></div>';   
+              echo '<div class="ChatBlock" id='$myrow['message_id']'><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'&nbsp<a href="doc/'.$myrow['uploaded_doc'].'">Документ</a></div>';   
             }
             elseif ($myrow['role_id']=='client' && (empty($myrow['uploaded_doc'])))
             {
-                echo '<div class="ChatBlock"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';  
+                echo '<div class="ChatBlock" id='$myrow['message_id']'><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';  
             } 
-            if ($myrow['role_id']=='consultant'){
-                echo '<div class="Consultant"><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';  
+            if ($myrow['role_id']=='consultant'&& (!empty($myrow['uploaded_doc'])))
+            {
+              echo '<div class="Consultant" id='$myrow['message_id']'><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'&nbsp<a href="doc/'.$myrow['uploaded_doc'].'">Документ</a></div>';   
+            }
+            elseif ($myrow['role_id']=='consultant' && (empty($myrow['uploaded_doc']))){
+                echo '<div class="Consultant" id='$myrow['message_id']'><span>'.$myrow['login'].' | '.$myrow['message_time'].'</span>'.$myrow['message_text'].'</div>';  
             } 
             }
 ?>
